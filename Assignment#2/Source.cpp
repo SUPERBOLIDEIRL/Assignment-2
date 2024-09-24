@@ -6,6 +6,7 @@
 struct STUDENT_DATA {
     std::string fn;
     std::string ln;
+    std::string email;
 };
 
 int main() {
@@ -26,9 +27,27 @@ int main() {
         file.close();
     }
     #ifdef _DEBUG
+    std::cout << "The application is running in debug mode!";
         for (const auto& student : students)   
         {
         std::cout << student.fn << " " << student.ln << std::endl;
+        }
+    #endif
+
+    #ifdef PRE_RELEASE
+        std::cout << "The application is running in pre-release mode!"
+        std::ifstream efile("StudentData_Emails.txt");
+        if (efile.is_open()) 
+        {
+            std::string email;
+            int index = 0;
+            while (std::getline(efile, email) && index < students.size()) 
+            {
+                students[index].email = email;
+                //std::cout << students[index].fn << " " << students[index].ln << " " << email << std::endl;
+                index++;
+            }
+            efile.close();
         }
     #endif
 
