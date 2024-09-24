@@ -25,5 +25,12 @@ int main() {
         }
         file.close();
     }
+    #ifdef _DEBUG
+        for (const auto& student : students)   
+        {
+        std::cout << student.fn << " " << student.ln << std::endl;
+        }
+    #endif
+
     return 0;
 }
